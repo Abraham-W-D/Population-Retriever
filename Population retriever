@@ -1,0 +1,34 @@
+
+#Assignment 7
+popData = { 'CA': 39.5, 'TX': 30.0, 'FL': 22.2, 'NY': 19.8, 'PA': 13.0, 'IL': 12.8, 'OH': 11.8, 'GA': 10.9, 'NC': 10.7, 'MI': 10.1}
+
+
+#define retrieve function
+def retrieve_pop(region_code, data_dict):
+    if region_code in data_dict:
+        return data_dict[region_code]
+    else:
+        return None
+
+
+#define main
+def main():
+    valid_codes = list(popData.keys())
+    user_input = input("Please enter a country code: ").strip().upper()
+
+    while retrieve_pop(user_input, popData) is None: #for invalid user inputs
+        print(f"Error: '{user_input}' not recognized. Valid codes: {', '.join(valid_codes)}")
+        user_choice = input("Would you like to try again? (yes/no): ").strip().lower()
+
+        if user_choice in ['no', 'n']:
+            print("Program terminated.")
+            return #ends program
+
+
+        user_input = input("Please enter a country code: ").strip().upper() #ask for another code if necessary
+
+    # Step 4: Display the result if valid
+    population = retrieve_pop(user_input, popData)
+    print(f"{user_input} population = {population}")
+
+main()
